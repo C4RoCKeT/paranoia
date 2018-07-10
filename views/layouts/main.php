@@ -45,14 +45,11 @@ AppAsset::register($this);
     } else {
         $menuItems[] = ['label' => 'Characters', 'url' => ['/characters']];
         $menuItems[] = ['label' => 'Mutant powers', 'url' => ['/mutant-powers']];
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
+        $menuItems[] = ['label' => Yii::$app->user->identity->username, 'items' => [
+            ['label' => 'Account', 'url' => ['settings/account']],
+            ['label' => 'Logout', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+
+        ]];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

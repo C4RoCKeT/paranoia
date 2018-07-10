@@ -23,6 +23,13 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  *
  * @property Characters[] $characters
+ *
+ * @method string getTwoFaSecret()
+ * @method boolean hasTwoFaEnabled()
+ * @method void generateTwoFaSecret()
+ * @method boolean enableTwoFa(null | string $secret)
+ * @method boolean disableTwoFa()
+ * @method boolean validateTwoFaCode(string $code, null | string $secret)
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface {
 

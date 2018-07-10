@@ -47,13 +47,23 @@ $config = [
         ],
         'db' => $db,
         'twoFa' => ['class' => promocat\twofa\TwoFa::class],
-
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'settings/account' => 'users/view',
             ],
-        ]
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+//                    'basePath' => '@app/messages', // if advanced application, set @frontend/messages
+//                    'sourceLanguage' => 'en',
+//                    'fileMap' => [],
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];

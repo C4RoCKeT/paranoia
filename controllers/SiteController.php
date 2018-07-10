@@ -7,6 +7,7 @@ use app\models\forms\ResetPasswordForm;
 use app\models\forms\SignupForm;
 use app\models\forms\LoginForm;
 use app\models\forms\ContactForm;
+use promocat\twofa\models\TwoFaForm;
 use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -74,13 +75,43 @@ class SiteController extends Controller {
             return $this->goHome();
         }
 
+        Yii::$app->user->destroyLoginVerificationSession(); //Destroy it just to be sure!
+
         $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $user = $model->getUser();
+            if (!$user->hasTwoFaEnabled()) {
+                $model->login();
+                return $this->goBack();
+            }
+            Yii::$app->user->createLoginVerificationSession($user); //Allow the user to verify the login
+            return $this->redirect(['login-verification']);
+        }
+        $model->password = '';
+        return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLoginVerification() {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $user = Yii::$app->user->getIdentityFromLoginVerificationSession();
+        if ($user === null) {
+            Yii::$app->session->destroy();
+            return $this->goHome();
+        }
+
+        $model = new TwoFaForm();
+        $model->setScenario(TwoFaForm::SCENARIO_LOGIN);
+        $model->setUser($user);
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-
-        $model->password = '';
-        return $this->render('login', [
+        return $this->render('login-verification', [
             'model' => $model,
         ]);
     }
