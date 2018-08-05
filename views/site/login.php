@@ -5,6 +5,7 @@
 
 /* @var $model \app\models\forms\LoginForm */
 
+use yii\authclient\widgets\AuthChoice;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
@@ -36,5 +37,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php ActiveForm::end(); ?>
         </div>
+    </div>
+
+    <div class="social-auth-links text-center">
+        <p>- OR -</p>
+        <?php
+        $authAuthChoice = AuthChoice::begin([
+            'baseAuthUrl' => ['site/auth'],
+            'popupMode' => true,
+        ]);
+        foreach ($authAuthChoice->getClients() as $client):
+            $text = Yii::t('default', 'Sign in using {service}', ['service' => $client->getTitle()]);
+            switch ($client->getName()) {
+                case 'google':
+                    $icon = 'fa-google-plus';
+                    $buttonClass = 'btn-google';
+                    break;
+                default:
+                    $icon = 'fa-sign-in-alt';
+                    $buttonClass = 'btn-' . $client->getName();
+                    break;
+            }
+            echo $authAuthChoice->clientLink($client, '<i class="fa ' . $icon . '"></i>' . $text, ['class' => 'btn btn-block btn-social btn-flat ' . $buttonClass]);
+        endforeach;
+        AuthChoice::end();
+        ?>
     </div>
 </div>

@@ -114,10 +114,46 @@ a.desc:after {
     outline: none;
 }
 
-.form-row {
-    margin-bottom: 10px;
-}
+
 
 body {
 / / font-family: 'Oswald', sans-serif;
+}
+
+.form-part {
+
+}
+
+.form-part .form-header {
+    line-height: 2em;
+    background-color: #7cb7e2;
+}
+
+.form-part .form-header .form-header-part-number {
+    padding-left: 10px;
+    width: 120px;
+    background-color: #244362;
+    display: inline-block;
+    color: #ffffff;
+}
+
+.form-part .form-header .form-header-title {
+    padding-left: 10px;
+    font-weight: bold;
+    color: #244362;
+    display: inline-block;
+}
+
+.form-part .form-content {
+    padding: 10px 0;
+}
+
+.form-part .form-content .form-label {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.form-part .form-content .form-value {
+    border: 2px solid #7cb7e2;
+    padding: 5px;
 }

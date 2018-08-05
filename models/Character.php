@@ -16,6 +16,7 @@ use paulzi\jsonBehavior\JsonValidator;
  * @property string $security_clearance
  * @property string $home_sector
  * @property integer $clone_number
+ * @property string $gender
  * @property string $personality
  *
  * Development
@@ -39,11 +40,8 @@ use paulzi\jsonBehavior\JsonValidator;
  */
 class Character extends \yii\db\ActiveRecord {
 
-//    public $clone_number = 1;
-//    public $moxie = 65;
-//    public $max_moxie = 8;
-//    public $wounds = 0;
-//    public $security_clearance = 'blue';
+    const GENDER_MALE = 'm';
+    const GENDER_FEMALE = 'f';
 
     /**
      * @inheritdoc
@@ -71,6 +69,14 @@ class Character extends \yii\db\ActiveRecord {
             [['personality', 'memory', 'equipment'], 'string'],
             [['name', 'security_clearance', 'home_sector'], 'string', 'max' => 50],
             [['stats', 'skills'], JsonValidator::class],
+            ['gender', 'default', 'value' => self::GENDER_MALE],
+            ['gender', 'in', 'range' => [self::GENDER_MALE, self::GENDER_FEMALE]],
+        ];
+    }
+
+    public function attributeLabels() {
+        return [
+            'clone_number' => 'Clone#'
         ];
     }
 
@@ -131,6 +137,14 @@ class Character extends \yii\db\ActiveRecord {
 
     public function getFullName() {
         return $this->name . '-' . ucfirst($this->security_clearance[0]) . '-' . mb_strtoupper($this->home_sector);
+    }
+
+    public function getStat($stat) {
+        return isset($this->stats[$stat]) ? $this->stats[$stat] : null;
+    }
+
+    public function getSkill($skill) {
+        return isset($this->skills[$skill]) ? $this->skills[$skill] : null;
     }
 
 }

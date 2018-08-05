@@ -7,6 +7,7 @@
  */
 
 use yii\helpers\Html;
+use app\components\FormHeader;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Character */
@@ -46,64 +47,58 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="text-center" style="color:#ff0000;font-size:18px;letter-spacing:4px;">► THIS FORM IS MANDATORY</div>
             </div>
         </div>
-        <div class="row form-row">
+        <div class="row form-part">
             <div class="col-xs-12">
-                <div class="form-header" style="line-height:2em;background-color:#7cb7e2;">
-                    <div class="form-header-number" style="padding-left:10px;width:120px;background-color:#244362;display:inline-block;color:#ffffff;"><i>///
-                            PART ONE</i></div>
-                    <div class="form-header-description" style="padding-left:10px;font-weight:bold;color:#244362;display:inline-block;">CORE INFORMATION >>>
-                    </div>
-                </div>
+                <?= FormHeader::widget([
+                    'part' => 1,
+                    'title' => 'Core Information'
+                ]); ?>
                 <div class="form-content">
-
+                    <?= $this->render('form/_core-information', compact('model')) ?>
                 </div>
             </div>
         </div>
-        <div class="row form-row">
+        <div class="row form-part">
             <div class="col-xs-12">
-                <div class="form-header" style="line-height:2em;background-color:#7cb7e2;">
-                    <div class="form-header-number" style="padding-left:10px;width:120px;background-color:#244362;display:inline-block;color:#ffffff;"><i>///
-                            PART TWO</i></div>
-                    <div class="form-header-description" style="padding-left:10px;font-weight:bold;color:#244362;display:inline-block;">DEVELOPMENT >>></div>
-                </div>
+                <?= FormHeader::widget([
+                    'part' => 2,
+                    'title' => 'Development'
+                ]); ?>
                 <div class="form-content">
-
+                    <?= $this->render('form/_development', compact('model')) ?>
                 </div>
             </div>
         </div>
-        <div class="row form-row">
+        <div class="row form-part">
             <div class="col-xs-12">
-                <div class="form-header" style="line-height:2em;background-color:#7cb7e2;">
-                    <div class="form-header-number" style="padding-left:10px;width:120px;background-color:#244362;display:inline-block;color:#ffffff;"><i>///
-                            PART THREE</i></div>
-                    <div class="form-header-description" style="padding-left:10px;font-weight:bold;color:#244362;display:inline-block;">SKILLS >>></div>
-                </div>
+                <?= FormHeader::widget([
+                    'part' => 3,
+                    'title' => 'Skills'
+                ]); ?>
                 <div class="form-content">
-
+                    <?= $this->render('form/_skills', compact('model')) ?>
                 </div>
             </div>
         </div>
-        <div class="row form-row">
+        <div class="row form-part">
             <div class="col-xs-12">
-                <div class="form-header" style="line-height:2em;background-color:#7cb7e2;">
-                    <div class="form-header-number" style="padding-left:10px;width:120px;background-color:#244362;display:inline-block;color:#ffffff;"><i>///
-                            PART FOUR</i></div>
-                    <div class="form-header-description" style="padding-left:10px;font-weight:bold;color:#244362;display:inline-block;">WELLBEING >>></div>
-                </div>
+                <?= FormHeader::widget([
+                    'part' => 4,
+                    'title' => 'Wellbeing'
+                ]); ?>
                 <div class="form-content">
-
+                    <?= $this->render('form/_wellbeing', compact('model')) ?>
                 </div>
             </div>
         </div>
-        <div class="row form-row">
+        <div class="row form-part">
             <div class="col-xs-12">
-                <div class="form-header" style="line-height:2em;background-color:#7cb7e2;">
-                    <div class="form-header-number" style="padding-left:10px;width:120px;background-color:#244362;display:inline-block;color:#ffffff;"><i>///
-                            PART FIVE</i></div>
-                    <div class="form-header-description" style="padding-left:10px;font-weight:bold;color:#244362;display:inline-block;">EQUIPMENT >>></div>
-                </div>
+                <?= FormHeader::widget([
+                    'part' => 5,
+                    'title' => 'Equipment'
+                ]); ?>
                 <div class="form-content">
-
+                    <?= $this->render('form/_equipment', compact('model')) ?>
                 </div>
             </div>
         </div>

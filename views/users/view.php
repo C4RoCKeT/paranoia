@@ -1,5 +1,6 @@
 <?php
 
+use yii\authclient\widgets\AuthChoice;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\widgets\ListView;
@@ -69,9 +70,45 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ]); ?>
         </div>
-        <div class="col-lg-6">
-
-        </div>
+        <?php if (Yii::$app->getUser()->getId() === $model->id): ?>
+            <div class="col-lg-6">
+                <?php
+                $authAuthChoice = AuthChoice::begin([
+                    'baseAuthUrl' => ['site/auth'],
+                    'popupMode' => true,
+                ]);
+                foreach ($authAuthChoice->getClients() as $client):
+                    $text = 'Connect your ' . $client->getTitle() . ' account';
+                    switch ($client->getName()) {
+                        case 'google':
+                            $icon = 'fa-google-plus';
+                            $buttonClass = 'btn-google';
+                            break;
+                        default:
+                            $icon = 'fa-sign-in-alt';
+                            $buttonClass = 'btn-' . $client->getName();
+                            break;
+                    }
+                    $connected = $model->isConnected($client) ? 'disabled' : '';
+                    ?>
+                    <div class="col-xs-8 col-sm-6 col-md-5 col-lg-4">
+                        <?= $authAuthChoice->clientLink($client, '<i class="fa ' . $icon . '"></i>' . $text, [
+                            'class' => 'btn btn-block btn-social btn-flat ' . $buttonClass . ' ' . ($connected ? 'disabled' : '')
+                        ]) ?>
+                    </div>
+                    <div class="col-xs-1 col-sm-4 col-md-7 col-lg-8" style="padding-top:6px;">
+                        <?php
+                        if ($connected):
+                            echo Html::tag('span', 'Connected', ['class' => 'label label-success']);
+                        endif;
+                        ?>
+                    </div>
+                <?php
+                endforeach;
+                AuthChoice::end();
+                ?>
+            </div>
+        <?php endif; ?>
     </div>
 
 </div>
