@@ -6,8 +6,8 @@
 /* @var $model \frontend\models\forms\LoginForm */
 
 use yii\authclient\widgets\AuthChoice;
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -58,7 +58,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     $buttonClass = 'btn-' . $client->getName();
                     break;
             }
-            echo $authAuthChoice->clientLink($client, '<i class="fa ' . $icon . '"></i>' . $text, ['class' => 'btn btn-block btn-social btn-flat ' . $buttonClass]);
+            echo $authAuthChoice->clientLink($client, '<i class="fa ' . $icon . '"></i>' . $text,
+                ['class' => 'btn btn-block btn-social btn-flat ' . $buttonClass]);
         endforeach;
         AuthChoice::end();
         ?>

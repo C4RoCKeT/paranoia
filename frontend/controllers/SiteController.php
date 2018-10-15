@@ -3,24 +3,26 @@
 namespace frontend\controllers;
 
 use frontend\components\AuthHandler;
+use frontend\models\forms\ContactForm;
+use frontend\models\forms\LoginForm;
 use frontend\models\forms\PasswordResetRequestForm;
 use frontend\models\forms\ResetPasswordForm;
 use frontend\models\forms\SignupForm;
-use frontend\models\forms\LoginForm;
-use frontend\models\forms\ContactForm;
 use promocat\twofa\models\TwoFaForm;
+use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\Response;
-use yii\filters\VerbFilter;
-use Yii;
 
-class SiteController extends Controller {
+class SiteController extends Controller
+{
     /**
      * {@inheritdoc}
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'access' => [
                 'class' => AccessControl::class,
@@ -45,7 +47,8 @@ class SiteController extends Controller {
     /**
      * {@inheritdoc}
      */
-    public function actions() {
+    public function actions()
+    {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -67,7 +70,8 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         return $this->render('index');
     }
 
@@ -76,7 +80,8 @@ class SiteController extends Controller {
      *
      * @return Response|string
      */
-    public function actionLogin() {
+    public function actionLogin()
+    {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -99,7 +104,8 @@ class SiteController extends Controller {
         ]);
     }
 
-    public function actionLoginVerification() {
+    public function actionLoginVerification()
+    {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -127,7 +133,8 @@ class SiteController extends Controller {
      *
      * @return Response
      */
-    public function actionLogout() {
+    public function actionLogout()
+    {
         Yii::$app->user->logout();
 
         return $this->goHome();
@@ -138,7 +145,8 @@ class SiteController extends Controller {
      *
      * @return Response|string
      */
-    public function actionContact() {
+    public function actionContact()
+    {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
@@ -155,7 +163,8 @@ class SiteController extends Controller {
      *
      * @return string
      */
-    public function actionAbout() {
+    public function actionAbout()
+    {
         return $this->render('about');
     }
 
@@ -166,7 +175,8 @@ class SiteController extends Controller {
      * @return mixed
      * @throws \yii\base\Exception
      */
-    public function actionSignup($inviteKey = null) {
+    public function actionSignup($inviteKey = null)
+    {
         if ($inviteKey !== Yii::$app->params['inviteKey']) {
             $this->goHome();
         }
@@ -185,7 +195,9 @@ class SiteController extends Controller {
 
     public function actionInvite()
     {
-        $inviteKey = Yii::$app->params['inviteKey'];
+        return $this->render('invite', [
+            'inviteKey' => Yii::$app->params['inviteKey']
+        ]);
     }
 
     /**
@@ -193,7 +205,8 @@ class SiteController extends Controller {
      *
      * @return mixed
      */
-    public function actionRequestPasswordReset() {
+    public function actionRequestPasswordReset()
+    {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -216,7 +229,8 @@ class SiteController extends Controller {
      * @throws BadRequestHttpException
      * @throws \yii\base\Exception
      */
-    public function actionResetPassword($token) {
+    public function actionResetPassword($token)
+    {
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidArgumentException $e) {

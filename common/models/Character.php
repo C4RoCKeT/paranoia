@@ -38,7 +38,8 @@ use paulzi\jsonBehavior\JsonValidator;
  *
  * @property Users $user
  */
-class Character extends \yii\db\ActiveRecord {
+class Character extends \yii\db\ActiveRecord
+{
 
     const GENDER_MALE = 'm';
     const GENDER_FEMALE = 'f';
@@ -46,11 +47,13 @@ class Character extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'character';
     }
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             [
                 'class' => JsonBehavior::class,
@@ -62,7 +65,8 @@ class Character extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['user_id', 'name', 'security_clearance', 'home_sector', 'clone_number'], 'required'],
             [['user_id', 'clone_number', 'treason_stars', 'xp_points', 'moxie', 'max_moxie', 'wounds'], 'integer'],
@@ -74,7 +78,8 @@ class Character extends \yii\db\ActiveRecord {
         ];
     }
 
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'clone_number' => 'Clone#'
         ];
@@ -83,11 +88,18 @@ class Character extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser() {
+    public function getUser()
+    {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 
-    public function securityClearances() {
+    public function securityClearanceList()
+    {
+        return array_combine($this->securityClearances(), array_map('ucfirst', $this->securityClearances()));
+    }
+
+    public function securityClearances()
+    {
         return [
             'infrared',
             'red',
@@ -101,11 +113,8 @@ class Character extends \yii\db\ActiveRecord {
         ];
     }
 
-    public function securityClearanceList() {
-        return array_combine($this->securityClearances(), array_map('ucfirst', $this->securityClearances()));
-    }
-
-    public function stats() {
+    public function stats()
+    {
         return [
             'violence',
             'chutzpah',
@@ -114,7 +123,8 @@ class Character extends \yii\db\ActiveRecord {
         ];
     }
 
-    public function skills() {
+    public function skills()
+    {
         return [
             'athletics',
             'guns',
@@ -135,15 +145,18 @@ class Character extends \yii\db\ActiveRecord {
         ];
     }
 
-    public function getFullName() {
+    public function getFullName()
+    {
         return $this->name . '-' . ucfirst($this->security_clearance[0]) . '-' . mb_strtoupper($this->home_sector);
     }
 
-    public function getStat($stat) {
+    public function getStat($stat)
+    {
         return isset($this->stats[$stat]) ? $this->stats[$stat] : null;
     }
 
-    public function getSkill($skill) {
+    public function getSkill($skill)
+    {
         return isset($this->skills[$skill]) ? $this->skills[$skill] : null;
     }
 

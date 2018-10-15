@@ -11,17 +11,20 @@ use yii\helpers\ArrayHelper;
 /**
  * AuthHandler handles successful authentication via Yii auth component
  */
-class AuthHandler {
+class AuthHandler
+{
     /**
      * @var ClientInterface
      */
     private $client;
 
-    public function __construct(ClientInterface $client) {
+    public function __construct(ClientInterface $client)
+    {
         $this->client = $client;
     }
 
-    public function handle() {
+    public function handle()
+    {
         $attributes = $this->client->getUserAttributes();
         $email = ArrayHelper::getValue($attributes, 'email');
         if ($email === null && isset($attributes['emails'])) {
@@ -43,7 +46,8 @@ class AuthHandler {
                 Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration']);
             } else {
                 if ($email !== null && User::find()->where(['email' => $email])->exists()) {
-                    Yii::$app->getSession()->setFlash('error', Yii::t('app', "Your {client} account isn't linked yet.", ['client' => $this->client->getTitle()]));
+                    Yii::$app->getSession()->setFlash('error',
+                        Yii::t('app', "Your {client} account isn't linked yet.", ['client' => $this->client->getTitle()]));
                 } else {
                     Yii::$app->getSession()->setFlash('error', Yii::t('app', "Incorrect e-mail address"));
                 }

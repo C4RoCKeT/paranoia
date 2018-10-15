@@ -19,7 +19,8 @@ $updateModel = isset($updateModel) ? $updateModel : false;
 
 
     <div class="form-group">
-        <?= Html::submitButton($model->getModel()->isNewRecord ? 'Create' : 'Update', ['class' => $model->getModel()->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->getModel()->isNewRecord ? 'Create' : 'Update',
+            ['class' => $model->getModel()->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

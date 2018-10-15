@@ -2,10 +2,10 @@
 
 namespace frontend\controllers;
 
-use app\models\forms\UserForm;
+use common\models\User;
+use frontend\models\forms\UserForm;
 use promocat\twofa\models\TwoFaForm;
 use Yii;
-use common\models\User;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -14,9 +14,11 @@ use yii\web\NotFoundHttpException;
 /**
  * UsersController implements the CRUD actions for User model.
  */
-class UsersController extends Controller {
+class UsersController extends Controller
+{
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'access' => [
                 'class' => \yii\filters\AccessControl::class,
@@ -34,7 +36,8 @@ class UsersController extends Controller {
      * Lists all User models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $dataProvider = new ActiveDataProvider([
             'query' => User::find(),
         ]);
@@ -50,7 +53,8 @@ class UsersController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionView($id = null) {
+    public function actionView($id = null)
+    {
         if ($id === null) {
             $id = Yii::$app->user->getId();
         }
@@ -72,7 +76,8 @@ class UsersController extends Controller {
      * @throws NotFoundHttpException
      * @throws \yii\base\Exception
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = new UserForm();
         $model->setModel($this->findModel($id));
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -84,6 +89,22 @@ class UsersController extends Controller {
     }
 
     /**
+     * Finds the User model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return User the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested user does not exist.');
+        }
+    }
+
+    /**
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -92,7 +113,8 @@ class UsersController extends Controller {
      * @throws \Throwable
      * @throws \yii\db\StaleObjectException
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         $model = $this->findModel($id);
         if ($model->isCurrentUser()) {
             throw new ForbiddenHttpException('You are not allowed to delete yourself.');
@@ -110,7 +132,8 @@ class UsersController extends Controller {
      * @throws NotFoundHttpException
      * @throws ForbiddenHttpException
      */
-    public function actionEnableTwoFa($id) {
+    public function actionEnableTwoFa($id)
+    {
         $model = new TwoFaForm();
         $user = $this->findModel($id);
 
@@ -141,7 +164,8 @@ class UsersController extends Controller {
      * @throws NotFoundHttpException
      * @throws ForbiddenHttpException
      */
-    public function actionDisableTwoFa($id) {
+    public function actionDisableTwoFa($id)
+    {
         $user = $this->findModel($id);
         if ($user->id !== Yii::$app->user->id) {
             throw new ForbiddenHttpException('You are not allowed to update this user.');
@@ -152,21 +176,6 @@ class UsersController extends Controller {
             $user->disableTwoFa();
         }
         return $this->redirect(['view', 'id' => $user->id]);
-    }
-
-    /**
-     * Finds the User model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return User the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id) {
-        if (($model = User::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested user does not exist.');
-        }
     }
 
 }

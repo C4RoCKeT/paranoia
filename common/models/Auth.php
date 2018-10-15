@@ -14,18 +14,21 @@ use Yii;
  *
  * @property User $user
  */
-class Auth extends \yii\db\ActiveRecord {
+class Auth extends \yii\db\ActiveRecord
+{
     /**
      * {@inheritdoc}
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'auth';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['user_id', 'source', 'source_id'], 'required'],
             [['user_id'], 'integer'],
@@ -37,7 +40,8 @@ class Auth extends \yii\db\ActiveRecord {
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => Yii::t('app', 'ID'),
             'user_id' => Yii::t('app', 'User ID'),
@@ -49,7 +53,8 @@ class Auth extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser() {
+    public function getUser()
+    {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }

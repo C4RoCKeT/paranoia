@@ -6,8 +6,8 @@
  * Time: 01:54
  */
 
-use yii\helpers\Html;
 use frontend\components\FormHeader;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Character */

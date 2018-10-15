@@ -9,7 +9,8 @@ use yii\base\Model;
 /**
  * Create user form
  */
-class UserForm extends Model {
+class UserForm extends Model
+{
 
     public $username;
     public $email;
@@ -20,25 +21,38 @@ class UserForm extends Model {
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => User::class, 'message' => 'This username has already been taken.', 'filter' => function ($query) {
-                if (!$this->getModel()->isNewRecord) {
-                    $query->andWhere(['not', ['id' => $this->getModel()->id]]);
+            [
+                'username',
+                'unique',
+                'targetClass' => User::class,
+                'message' => 'This username has already been taken.',
+                'filter' => function ($query) {
+                    if (!$this->getModel()->isNewRecord) {
+                        $query->andWhere(['not', ['id' => $this->getModel()->id]]);
+                    }
                 }
-            }],
+            ],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => User::class, 'message' => 'This email address has already been taken.', 'filter' => function ($query) {
-                if (!$this->getModel()->isNewRecord) {
-                    $query->andWhere(['not', ['id' => $this->getModel()->id]]);
+            [
+                'email',
+                'unique',
+                'targetClass' => User::class,
+                'message' => 'This email address has already been taken.',
+                'filter' => function ($query) {
+                    if (!$this->getModel()->isNewRecord) {
+                        $query->andWhere(['not', ['id' => $this->getModel()->id]]);
+                    }
                 }
-            }],
+            ],
 
             ['password', 'required', 'on' => 'create'],
             ['password', 'string', 'min' => 6],
@@ -49,7 +63,8 @@ class UserForm extends Model {
     /**
      * @return User
      */
-    public function getModel() {
+    public function getModel()
+    {
         if (!$this->model) {
             $this->model = new User();
         }
@@ -60,7 +75,8 @@ class UserForm extends Model {
      * @param User $model
      * @return mixed
      */
-    public function setModel($model) {
+    public function setModel($model)
+    {
         $this->username = $model->username;
         $this->email = $model->email;
         $this->status = $model->status;
@@ -71,7 +87,8 @@ class UserForm extends Model {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'username' => 'Username',
             'email' => 'Email',
@@ -85,7 +102,8 @@ class UserForm extends Model {
      * @return User|null the saved model or null if saving fails
      * @throws Exception
      */
-    public function save() {
+    public function save()
+    {
         if ($this->validate()) {
             $model = $this->getModel();
             $model->username = $this->username;

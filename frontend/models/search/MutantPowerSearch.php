@@ -2,19 +2,20 @@
 
 namespace frontend\models\search;
 
-use Yii;
+use common\models\MutantPower;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\MutantPower;
 
 /**
  * MutantPowerSearch represents the model behind the search form of `common\models\MutantPower`.
  */
-class MutantPowerSearch extends MutantPower {
+class MutantPowerSearch extends MutantPower
+{
     /**
      * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['id'], 'integer'],
             [['name', 'description'], 'safe'],
@@ -24,7 +25,8 @@ class MutantPowerSearch extends MutantPower {
     /**
      * {@inheritdoc}
      */
-    public function scenarios() {
+    public function scenarios()
+    {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -36,7 +38,8 @@ class MutantPowerSearch extends MutantPower {
      *
      * @return ActiveDataProvider
      */
-    public function search($params) {
+    public function search($params)
+    {
         $query = MutantPower::find();
 
         // add conditions that should always apply here

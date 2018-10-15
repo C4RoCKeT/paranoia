@@ -2,21 +2,23 @@
 
 namespace frontend\controllers;
 
-use Yii;
 use common\models\MutantPower;
 use frontend\models\search\MutantPowerSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * MutantPowersController implements the CRUD actions for MutantPower model.
  */
-class MutantPowersController extends Controller {
+class MutantPowersController extends Controller
+{
     /**
      * {@inheritdoc}
      */
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -31,7 +33,8 @@ class MutantPowersController extends Controller {
      * Lists all MutantPower models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $searchModel = new MutantPowerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -47,10 +50,27 @@ class MutantPowersController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    /**
+     * Finds the MutantPower model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return MutantPower the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = MutantPower::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**
@@ -58,7 +78,8 @@ class MutantPowersController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $model = new MutantPower();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -77,7 +98,8 @@ class MutantPowersController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -96,24 +118,10 @@ class MutantPowersController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id) {
+    public function actionDelete($id)
+    {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the MutantPower model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return MutantPower the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id) {
-        if (($model = MutantPower::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

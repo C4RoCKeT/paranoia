@@ -8,10 +8,11 @@
 
 namespace frontend\components;
 
-use \NumberFormatter;
+use NumberFormatter;
 use yii\base\Widget;
 
-class FormHeader extends Widget {
+class FormHeader extends Widget
+{
 
     public $partTemplate = '/// Part {part}';
     public $titleTemplate = '{title} >>>';
@@ -25,7 +26,8 @@ class FormHeader extends Widget {
     public $upperCase = true;
 
 
-    public function run() {
+    public function run()
+    {
         $numberFormatter = new NumberFormatter($this->numberLanguage, NumberFormatter::SPELLOUT);
         $partLabel = strtr($this->partTemplate, ['{part}' => $numberFormatter->format($this->part)]);
         $title = strtr($this->titleTemplate, ['{title}' => $this->title]);

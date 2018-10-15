@@ -2,26 +2,30 @@
 
 namespace frontend\models\forms;
 
+use common\models\User;
 use Yii;
 use yii\base\Model;
-use common\models\User;
 
 /**
  * Password reset request form
  */
-class PasswordResetRequestForm extends Model {
+class PasswordResetRequestForm extends Model
+{
     public $email;
 
 
     /**
      * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'exist',
+            [
+                'email',
+                'exist',
                 'targetClass' => User::class,
                 'filter' => ['status' => User::STATUS_ACTIVE],
                 'message' => 'There is no user with this email address.'
@@ -34,7 +38,8 @@ class PasswordResetRequestForm extends Model {
      *
      * @return bool whether the email was send
      */
-    public function sendEmail() {
+    public function sendEmail()
+    {
         /* @var $user User */
         $user = User::findOne([
             'status' => User::STATUS_ACTIVE,

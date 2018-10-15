@@ -4,12 +4,12 @@
 
 /* @var $content string */
 
+use common\assets\AppAsset;
 use frontend\widgets\Alert;
-use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
-use common\assets\AppAsset;
 
 AppAsset::register($this);
 ?>
@@ -45,11 +45,15 @@ AppAsset::register($this);
     } else {
         $menuItems[] = ['label' => 'Characters', 'url' => ['/characters']];
         $menuItems[] = ['label' => 'Mutant powers', 'url' => ['/mutant-powers']];
-        $menuItems[] = ['label' => Yii::$app->user->identity->username, 'items' => [
-            ['label' => 'Account', 'url' => ['settings/account']],
-            ['label' => 'Logout', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
+        $menuItems[] = [
+            'label' => Yii::$app->user->identity->username,
+            'items' => [
+                ['label' => 'Account', 'url' => ['settings/account']],
+                ['label' => 'Invite', 'url' => ['site/invite']],
+                ['label' => 'Logout', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'post']],
 
-        ]];
+            ]
+        ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

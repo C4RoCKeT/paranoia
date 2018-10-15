@@ -8,10 +8,10 @@
 
 namespace common\behaviors;
 
-use yii\base\Behavior;
+use common\models\Auth;
 use common\models\User;
 use yii\authclient\ClientInterface;
-use common\models\Auth;
+use yii\base\Behavior;
 
 /**
  * Class AuthClientBehavior

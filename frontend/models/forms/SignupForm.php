@@ -2,13 +2,14 @@
 
 namespace frontend\models\forms;
 
-use yii\base\Model;
 use common\models\User;
+use yii\base\Model;
 
 /**
  * Signup form
  */
-class SignupForm extends Model {
+class SignupForm extends Model
+{
     public $username;
     public $email;
     public $password;
@@ -16,7 +17,8 @@ class SignupForm extends Model {
     /**
      * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             ['username', 'trim'],
             ['username', 'required'],
@@ -40,7 +42,8 @@ class SignupForm extends Model {
      * @return User|null the saved model or null if saving fails
      * @throws \yii\base\Exception
      */
-    public function signup() {
+    public function signup()
+    {
         if (!$this->validate()) {
             return null;
         }

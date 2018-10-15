@@ -2,8 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "mutant_power".
  *
@@ -11,18 +9,21 @@ use Yii;
  * @property string $name
  * @property string $description
  */
-class MutantPower extends \yii\db\ActiveRecord {
+class MutantPower extends \yii\db\ActiveRecord
+{
     /**
      * {@inheritdoc}
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'mutant_power';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['name', 'description'], 'required'],
             [['description'], 'string'],
@@ -33,7 +34,8 @@ class MutantPower extends \yii\db\ActiveRecord {
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'id' => 'ID',
             'name' => 'Name',

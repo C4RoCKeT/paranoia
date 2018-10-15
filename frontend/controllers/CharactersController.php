@@ -2,19 +2,21 @@
 
 namespace frontend\controllers;
 
-use Yii;
 use common\models\Character;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * CharactersController implements the CRUD actions for Character model.
  */
-class CharactersController extends Controller {
+class CharactersController extends Controller
+{
 
-    public function behaviors() {
+    public function behaviors()
+    {
         return [
             'verbs' => [
                 'class' => VerbFilter::class,
@@ -29,7 +31,8 @@ class CharactersController extends Controller {
      * Lists all Character models.
      * @return mixed
      */
-    public function actionIndex() {
+    public function actionIndex()
+    {
         $userCharacters = new ActiveDataProvider([
             'query' => Character::find()->where(['user_id' => Yii::$app->getUser()->getId()])->orderBy(['name' => SORT_ASC]),
         ]);
@@ -48,9 +51,25 @@ class CharactersController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionView($id) {
+    public function actionView($id)
+    {
         $model = $this->findModel($id);
         return $this->render('view', ['model' => $model]);
+    }
+
+    /**
+     * Finds the Character model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Character the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Character::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     /**
@@ -58,7 +77,8 @@ class CharactersController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $model = new Character();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -77,7 +97,8 @@ class CharactersController extends Controller {
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id) {
+    public function actionUpdate($id)
+    {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -87,20 +108,6 @@ class CharactersController extends Controller {
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
-
-    /**
-     * Finds the Character model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Character the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id) {
-        if (($model = Character::findOne($id)) !== null) {
-            return $model;
-        }
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
 }
