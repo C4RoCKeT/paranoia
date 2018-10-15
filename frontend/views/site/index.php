@@ -1,0 +1,55 @@
+<?php
+
+/* @var $this yii\web\View */
+
+$this->title = 'Welcome to Alpha Complex!';
+?>
+<div class="site-index">
+
+    <div class="jumbotron">
+        <?php if (rand(1, 2) === 1): ?>
+            <h1>Welcome to Alpha Complex!</h1>
+
+            <p class="lead">The fantastic underground city where we all live.</p>
+        <?php else: ?>
+            <h1><span class="text-danger">Trust the computer!</span></h1>
+
+            <p class="lead text-danger">The computer is your friend!</p>
+        <?php endif; ?>
+
+    </div>
+
+    <div class="body-content">
+
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Alpha Complex</h2>
+
+                <p>We know only that the complex is situated on the American west coast, where San Fransico once was, that much of it is underground, and yet is still close enough to the surface that citizens have heard rumours of Outdoors.</p>
+
+                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur.</p>
+
+                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                    fugiat nulla pariatur.</p>
+
+                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            </div>
+        </div>
+
+    </div>
+</div>
