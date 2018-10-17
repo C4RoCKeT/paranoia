@@ -10,5 +10,6 @@
 ?>
 <div class="row">
     <div class="col-xs-12">
-        <?= $form->field($model, 'equipment')->error(false)->label(false)->textarea() ?>
+        <span class="form-value form-control"><?= $model->equipment ?></span>
     </div>
+</div>

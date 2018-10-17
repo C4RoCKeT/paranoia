@@ -1,14 +1,15 @@
 <?php
 
-use yii\helpers\Html;
+use frontend\components\FormHeader;
 use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Character */
 /* @var $form ActiveForm */
 ?>
 <div class="character-form" style="max-width:920px;margin-left:auto;margin-right:auto;">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
     <div class="row">
         <div class="col-xs-5">
             <img src="/img/alpha-complex-form.png" alt="This form is mandatory" style="max-width:100%;"/>
@@ -24,77 +25,58 @@ use yii\widgets\ActiveForm;
             <div class="text-center" style="color:#ff0000;font-size:18px;letter-spacing:4px;">► THIS FORM IS MANDATORY</div>
         </div>
     </div>
-    <div class="row form-row">
+    <div class="row form-part">
         <div class="col-xs-12">
-            <div class="form-header" style="line-height:2em;background-color:#7cb7e2;">
-                <div class="form-header-number" style="padding-left:10px;width:120px;background-color:#244362;display:inline-block;color:#ffffff;"><i>///
-                        PART ONE</i></div>
-                <div class="form-header-description" style="padding-left:10px;font-weight:bold;color:#244362;display:inline-block;">CORE INFORMATION >>>
-                </div>
-            </div>
+            <?= FormHeader::widget([
+                'part' => 1,
+                'title' => 'Core Information'
+            ]); ?>
             <div class="form-content">
-                <?= $form->field($model, 'name') ?>
-                <?= $form->field($model, 'security_clearance')->dropDownList($model->securityClearanceList()) ?>
-                <?= $form->field($model, 'home_sector') ?>
-                <?= $form->field($model, 'clone_number') ?>
+                <?= $this->render('form/_core-information', compact('model', 'form')) ?>
             </div>
         </div>
     </div>
-    <div class="row form-row">
+    <div class="row form-part">
         <div class="col-xs-12">
-            <div class="form-header" style="line-height:2em;background-color:#7cb7e2;">
-                <div class="form-header-number" style="padding-left:10px;width:120px;background-color:#244362;display:inline-block;color:#ffffff;"><i>///
-                        PART TWO</i></div>
-                <div class="form-header-description" style="padding-left:10px;font-weight:bold;color:#244362;display:inline-block;">DEVELOPMENT >>></div>
-            </div>
+            <?= FormHeader::widget([
+                'part' => 2,
+                'title' => 'Development'
+            ]); ?>
             <div class="form-content">
-                <?= $form->field($model, 'treason_stars') ?>
-                <?= $form->field($model, 'xp_points') ?>
-                Stats
-                <?php foreach ($model->stats() as $stat) :
-                    echo $form->field($model, 'stats[' . $stat . ']')->label(mb_strtoupper($stat));
-                endforeach; ?>
+                <?= $this->render('form/_development', compact('model', 'form')) ?>
             </div>
         </div>
     </div>
-    <div class="row form-row">
+    <div class="row form-part">
         <div class="col-xs-12">
-            <div class="form-header" style="line-height:2em;background-color:#7cb7e2;">
-                <div class="form-header-number" style="padding-left:10px;width:120px;background-color:#244362;display:inline-block;color:#ffffff;"><i>///
-                        PART THREE</i></div>
-                <div class="form-header-description" style="padding-left:10px;font-weight:bold;color:#244362;display:inline-block;">SKILLS >>></div>
-            </div>
+            <?= FormHeader::widget([
+                'part' => 3,
+                'title' => 'Skills'
+            ]); ?>
             <div class="form-content">
-                <?php foreach ($model->skills() as $skill) :
-                    echo $form->field($model, 'skills[' . $skill . ']')->label(mb_strtoupper($skill));
-                endforeach; ?>
+                <?= $this->render('form/_skills', compact('model', 'form')) ?>
             </div>
         </div>
     </div>
-    <div class="row form-row">
+    <div class="row form-part">
         <div class="col-xs-12">
-            <div class="form-header" style="line-height:2em;background-color:#7cb7e2;">
-                <div class="form-header-number" style="padding-left:10px;width:120px;background-color:#244362;display:inline-block;color:#ffffff;"><i>///
-                        PART FOUR</i></div>
-                <div class="form-header-description" style="padding-left:10px;font-weight:bold;color:#244362;display:inline-block;">WELLBEING >>></div>
-            </div>
+            <?= FormHeader::widget([
+                'part' => 4,
+                'title' => 'Wellbeing'
+            ]); ?>
             <div class="form-content">
-                <?= $form->field($model, 'moxie') ?>
-                <?= $form->field($model, 'max_moxie') ?>
-                <?= $form->field($model, 'wounds') ?>
-                <?= $form->field($model, 'memory')->textarea() ?>
+                <?= $this->render('form/_wellbeing', compact('model', 'form')) ?>
             </div>
         </div>
     </div>
-    <div class="row form-row">
+    <div class="row form-part">
         <div class="col-xs-12">
-            <div class="form-header" style="line-height:2em;background-color:#7cb7e2;">
-                <div class="form-header-number" style="padding-left:10px;width:120px;background-color:#244362;display:inline-block;color:#ffffff;"><i>///
-                        PART FIVE</i></div>
-                <div class="form-header-description" style="padding-left:10px;font-weight:bold;color:#244362;display:inline-block;">EQUIPMENT >>></div>
-            </div>
+            <?= FormHeader::widget([
+                'part' => 5,
+                'title' => 'Equipment'
+            ]); ?>
             <div class="form-content">
-                <?= $form->field($model, 'equipment')->textarea() ?>
+                <?= $this->render('form/_equipment', compact('model', 'form')) ?>
             </div>
         </div>
     </div>
@@ -102,5 +84,4 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>
-
-</div><!-- characters-_form -->
+</div>

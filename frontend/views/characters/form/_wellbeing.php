@@ -9,16 +9,16 @@
 /* @var \common\models\Character $model */
 ?>
 <div class="row">
-    <div class="col-xs-6">
-        <span class="form-label"><?= $model->getAttributeLabel('moxie') ?>:</span>
-        <span class="form-value form-control"><?= $model->moxie ?> / <?= $model->max_moxie ?></span>
+    <div class="col-xs-3">
+        <?= $form->field($model, 'moxie')->input('number', ['min' => 0, 'max' => 8])->error(false) ?>
+    </div>
+    <div class="col-xs-3">
+        <?= $form->field($model, 'max_moxie')->input('number', ['min' => 0, 'max' => 8])->error(false) ?>
     </div>
     <div class="col-xs-6">
-        <span class="form-label"><?= $model->getAttributeLabel('wounds') ?>:</span>
-        <span class="form-value form-control"><?= $model->wounds ?> / 4</span>
+        <?= $form->field($model, 'wounds')->input('number', ['min' => 0, 'max' => 4])->error(false) ?>
     </div>
     <div class="col-xs-12">
-        <span class="form-label"><?= $model->getAttributeLabel('memory') ?>:</span>
-        <span class="form-value form-control"><?= $model->memory ?></span>
+        <?= $form->field($model, 'memory')->error(false)->textarea() ?>
     </div>
 </div>

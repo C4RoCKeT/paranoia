@@ -81,7 +81,8 @@ class Character extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'clone_number' => 'Clone#'
+            'clone_number' => 'Clone#',
+            'skills[athletics]' => 'Athletics'
         ];
     }
 
@@ -95,7 +96,15 @@ class Character extends \yii\db\ActiveRecord
 
     public function securityClearanceList()
     {
-        return array_combine($this->securityClearances(), array_map('ucfirst', $this->securityClearances()));
+        return array_combine($this->securityClearances(), array_map('strtoupper', $this->securityClearances()));
+    }
+
+    public function genderList()
+    {
+        return [
+            self::GENDER_MALE => strtoupper(self::GENDER_MALE),
+            self::GENDER_FEMALE => strtoupper(self::GENDER_FEMALE)
+        ];
     }
 
     public function securityClearances()
@@ -133,7 +142,7 @@ class Character extends \yii\db\ActiveRecord
             'science',
             'psychology',
             'bureaucracy',
-            'alpha complex',
+            'alpha_complex',
             'bluff',
             'charm',
             'intimidate',
@@ -143,6 +152,16 @@ class Character extends \yii\db\ActiveRecord
             'program',
             'demolitions',
         ];
+    }
+
+    public function getStatLabel($stat)
+    {
+        return strtoupper($stat);
+    }
+
+    public function getSkillLabel($skill)
+    {
+        return strtoupper(str_replace('_', ' ', $skill));
     }
 
     public function getFullName()

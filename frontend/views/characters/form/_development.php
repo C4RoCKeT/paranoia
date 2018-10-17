@@ -10,30 +10,38 @@
 ?>
 <div class="row">
     <div class="col-xs-6">
-        <span class="form-label"><?= $model->getAttributeLabel('treason_stars') ?>:</span>
-        <span class="form-value form-control"><?= $model->treason_stars ?></span>
+        <?= $form
+            ->field($model, 'treason_stars')
+            ->input('number', ['min' => 0])
+            ->error(false)
+        ?>
     </div>
     <div class="col-xs-6">
-        <span class="form-label"><?= $model->getAttributeLabel('xp_points') ?>:</span>
-        <span class="form-value form-control"><?= strtoupper($model->xp_points) ?></span>
+        <?= $form
+            ->field($model, 'xp_points')
+            ->input('number', ['min' => 0])
+            ->error(false)
+        ?>
     </div>
     <div class="col-xs-12">
-        <div style="padding:5px 25px;font-weight:bold;color:#7cb7e2;margin:15px 0 10px;background:rgb(225,243,253);border:2px solid #7cb7e2;">STATS >>></div>
+        <div style="padding:5px 25px;font-weight:bold;color:#7cb7e2;margin:10px 0;background:rgb(225,243,253);border:2px solid #7cb7e2;">STATS >>></div>
     </div>
+    <?php foreach ($model->stats() as $stat): ?>
+        <div class="col-xs-3">
+            <?= $form
+                ->field($model, 'skills[' . $stat . ']', [
+                    'options' => [
+                        'class' => 'form-group character-stat'
+                    ]
+                ])
+                ->input('number', ['min' => -5, 'max' => 5])
+                ->label($model->getSkillLabel($stat))
+                ->error(false)
+            ?>
+        </div>
+    <?php endforeach; ?>
+
     <div class="col-xs-3">
-        <span class="form-label"><?= $model->getAttributeLabel('violence') ?>:</span>
-        <span class="form-value form-control"><?= $model->getStat('violence') ?></span>
-    </div>
-    <div class="col-xs-3">
-        <span class="form-label"><?= $model->getAttributeLabel('chutzpah') ?>:</span>
-        <span class="form-value form-control"><?= $model->getStat('chutzpah') ?></span>
-    </div>
-    <div class="col-xs-3">
-        <span class="form-label"><?= $model->getAttributeLabel('brains') ?>:</span>
-        <span class="form-value form-control"><?= $model->getStat('brains') ?></span>
-    </div>
-    <div class="col-xs-3">
-        <span class="form-label"><?= $model->getAttributeLabel('mechanics') ?>:</span>
-        <span class="form-value form-control"><?= $model->getStat('mechanics') ?></span>
+
     </div>
 </div>

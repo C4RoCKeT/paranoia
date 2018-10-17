@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title' => 'Core Information'
                 ]); ?>
                 <div class="form-content">
-                    <?= $this->render('form/_core-information', compact('model')) ?>
+                    <?= $this->render('view/_core-information', compact('model')) ?>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title' => 'Development'
                 ]); ?>
                 <div class="form-content">
-                    <?= $this->render('form/_development', compact('model')) ?>
+                    <?= $this->render('view/_development', compact('model')) ?>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title' => 'Skills'
                 ]); ?>
                 <div class="form-content">
-                    <?= $this->render('form/_skills', compact('model')) ?>
+                    <?= $this->render('view/_skills', compact('model')) ?>
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title' => 'Wellbeing'
                 ]); ?>
                 <div class="form-content">
-                    <?= $this->render('form/_wellbeing', compact('model')) ?>
+                    <?= $this->render('view/_wellbeing', compact('model')) ?>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title' => 'Equipment'
                 ]); ?>
                 <div class="form-content">
-                    <?= $this->render('form/_equipment', compact('model')) ?>
+                    <?= $this->render('view/_equipment', compact('model')) ?>
                 </div>
             </div>
         </div>

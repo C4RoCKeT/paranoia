@@ -76,15 +76,21 @@ class CharactersController extends Controller
      * Creates a new Character model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \Throwable
      */
     public function actionCreate()
     {
         $model = new Character();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->user_id = Yii::$app->user->getId();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                var_dump($model->getErrors());
+            }
+        } else {
+            $model->loadDefaultValues();
         }
-        $model->loadDefaultValues();
         return $this->render('create', [
             'model' => $model,
         ]);

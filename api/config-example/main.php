@@ -4,7 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'paranoia',
+    'id' => 'paranoia-api',
     'name' => 'Paranoia',
     'homeUrl' => '/',
     'basePath' => dirname(__DIR__),
@@ -23,7 +23,7 @@ $config = [
         ],
         'user' => [
             'class' => promocat\twofa\User::class,
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -63,18 +63,7 @@ $config = [
 //                    'fileMap' => [],
                 ],
             ],
-        ],
-        'authClientCollection' => [
-            'class' => 'yii\authclient\Collection',
-            'clients' => [
-                'google' => [
-                    'class' => 'yii\authclient\clients\Google',
-                    'clientId' => '123456',
-                    'clientSecret' => '4564567897893123',
-                    'validateAuthState' => false
-                ]
-            ],
-        ],
+        ]
     ],
     'params' => $params,
 ];

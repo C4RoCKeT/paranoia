@@ -18,17 +18,9 @@
                     echo '</ul></div><div class="col-xs-6 col-sm-3"><ul style="padding:0;margin:0;list-style:none;">';
                 }
                 ?>
-                <li style="line-height:38px;">
-                    <?= $form
-                        ->field($model, 'skills[' . $skill . ']', [
-                            'options' => [
-                                'class' => 'form-group character-skill'
-                            ]
-                        ])
-                        ->input('number', ['min' => -5, 'max' => 5])
-                        ->label($model->getSkillLabel($skill))
-                        ->error(false)
-                    ?>
+                <li style="line-height:38px;padding-bottom: 5px;">
+                    <span class="form-label"><?= $skill ?></span>
+                    <span class="form-value form-control" style="text-align:center;float:right;display:inline-block;width:34px;"><?= $model->getSkill($skill) ?></span>
                 </li>
                 <?php
             }

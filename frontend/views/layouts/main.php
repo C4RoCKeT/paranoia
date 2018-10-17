@@ -44,7 +44,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'Characters', 'url' => ['/characters']];
-        $menuItems[] = ['label' => 'Mutant powers', 'url' => ['/mutant-powers']];
+        //$menuItems[] = ['label' => 'Mutant powers', 'url' => ['/mutant-powers']];
         $menuItems[] = [
             'label' => Yii::$app->user->identity->username,
             'items' => [
