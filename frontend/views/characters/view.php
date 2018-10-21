@@ -30,75 +30,79 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-    <div class="character-form" style="max-width:920px;margin-left:auto;margin-right:auto;">
-        <div class="row">
-            <div class="col-xs-5">
-                <img src="/img/alpha-complex-form.png" alt="This form is mandatory" style="max-width:100%;"/>
-            </div>
-            <div class="col-xs-7 text-center">
-                <div class="character-image" style="height:120px;border:3px solid #7cb7e2;">
-                    <img src="/img/morty.jpg" alt="The mortiest Morty" style="max-width:100%;max-height:100%;">
+    <div id="cfc-1" class="character-form-container">
+        <div class="btn btn-outline-alpha btn-sm btn-outline btn-fullscreen" data-target="cfc-1">
+            <i class="fa fa-expand"></i>
+        </div>
+        <div class="character-form" style="max-width:920px;margin-left:auto;margin-right:auto;">
+            <div class="row">
+                <div class="col-xs-3">
+                    <img src="/img/alpha-complex-form.png" alt="This form is mandatory" style="max-width:100%;"/>
+                </div>
+                <div class="col-xs-7 text-center">
+                    <div class="character-image" style="height:120px;border:3px solid #7cb7e2;">
+                        <img src="/img/morty.jpg" alt="The mortiest Morty" style="max-width:100%;max-height:100%;">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="text-center" style="color:#ff0000;font-size:18px;letter-spacing:4px;">► THIS FORM IS MANDATORY</div>
-            </div>
-        </div>
-        <div class="row form-part">
-            <div class="col-xs-12">
-                <?= FormHeader::widget([
-                    'part' => 1,
-                    'title' => 'Core Information'
-                ]); ?>
-                <div class="form-content">
-                    <?= $this->render('view/_core-information', compact('model')) ?>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="text-center" style="color:#ff0000;font-size:18px;letter-spacing:4px;">► THIS FORM IS MANDATORY</div>
                 </div>
             </div>
-        </div>
-        <div class="row form-part">
-            <div class="col-xs-12">
-                <?= FormHeader::widget([
-                    'part' => 2,
-                    'title' => 'Development'
-                ]); ?>
-                <div class="form-content">
-                    <?= $this->render('view/_development', compact('model')) ?>
+            <div class="row form-part">
+                <div class="col-xs-12">
+                    <?= FormHeader::widget([
+                        'part' => 1,
+                        'title' => 'Core Information'
+                    ]); ?>
+                    <div class="form-content">
+                        <?= $this->render('view/_core-information', compact('model')) ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row form-part">
-            <div class="col-xs-12">
-                <?= FormHeader::widget([
-                    'part' => 3,
-                    'title' => 'Skills'
-                ]); ?>
-                <div class="form-content">
-                    <?= $this->render('view/_skills', compact('model')) ?>
+            <div class="row form-part">
+                <div class="col-xs-12">
+                    <?= FormHeader::widget([
+                        'part' => 2,
+                        'title' => 'Development'
+                    ]); ?>
+                    <div class="form-content">
+                        <?= $this->render('view/_development', compact('model')) ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row form-part">
-            <div class="col-xs-12">
-                <?= FormHeader::widget([
-                    'part' => 4,
-                    'title' => 'Wellbeing'
-                ]); ?>
-                <div class="form-content">
-                    <?= $this->render('view/_wellbeing', compact('model')) ?>
+            <div class="row form-part">
+                <div class="col-xs-12">
+                    <?= FormHeader::widget([
+                        'part' => 3,
+                        'title' => 'Skills'
+                    ]); ?>
+                    <div class="form-content">
+                        <?= $this->render('view/_skills', compact('model')) ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row form-part">
-            <div class="col-xs-12">
-                <?= FormHeader::widget([
-                    'part' => 5,
-                    'title' => 'Equipment'
-                ]); ?>
-                <div class="form-content">
-                    <?= $this->render('view/_equipment', compact('model')) ?>
+            <div class="row form-part">
+                <div class="col-xs-12">
+                    <?= FormHeader::widget([
+                        'part' => 4,
+                        'title' => 'Wellbeing'
+                    ]); ?>
+                    <div class="form-content">
+                        <?= $this->render('view/_wellbeing', compact('model')) ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-part">
+                <div class="col-xs-12">
+                    <?= FormHeader::widget([
+                        'part' => 5,
+                        'title' => 'Equipment'
+                    ]); ?>
+                    <div class="form-content">
+                        <?= $this->render('view/_equipment', compact('model')) ?>
+                    </div>
                 </div>
             </div>
         </div>
